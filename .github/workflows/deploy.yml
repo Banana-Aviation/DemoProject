@@ -1,0 +1,15 @@
+name: Deploy via Github-actions self-hosted runner
+
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: start docker container
+        run: |
+          docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}"
+          docker pull ispa/demo-proj:latest
+          docker stop demo-proj || true
+          docker rm demo-proj || true
+          docker run -d --name demo-proj -p 443:3000 ispa/demo-proj:latest
