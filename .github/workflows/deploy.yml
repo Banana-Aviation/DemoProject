@@ -12,4 +12,4 @@ jobs:
           docker pull ispa/demo-proj:latest
           docker stop demo-proj || true
           docker rm demo-proj || true
-          docker run -d --name demo-proj -p 443:3000 ispa/demo-proj:latest
+          docker run -d --name demo-proj -p 80:3000 ispa/demo-proj:latest
